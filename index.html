@@ -1,123 +1,193 @@
 ---
-layout: default
-title: home
+title: Festival of Neighbourhoods
 ---
-  <h2>The 2015 Season Has Begun</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   
-  <p>Festival of Neighbourhoods invites you to create opportunities to connect with your neighbours - plan a simple gathering or activities, start a neighbourhood project, or work with others to host events in your neighbourhoods that bring people together. These activities can grow into family, neighbourhood, and community traditions, just like Festival of Neighbourhoods has become part of the tradition and strength of our community!</p>
+  <title>
+    {{page.title}}
+  </title>
 
-  <p>Deadline to register your activities for this season is October 5th 2015. All activities held beween October 1, 2014 and September 30, 2015 can be eligible for prizes and awards.</p>
-  <div id="map" style="height: 650px"></div>
-  
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-  <script src = "http://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-  
-  <script>
-    var map = L.map('map').setView([43.43,-80.46], 12);
-      L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      id: 'examples.map-i875mjb7'
-    }).addTo(map);
-    
-    function getColor(w) {
-      return w == 10 ? '#ffffb3' :
-             w == 9  ? '#bebada' :
-             w == 8  ? '#fb8072' :
-             w == 7  ? '#80b1d3' :
-             w == 6  ? '#fdb462' :
-             w == 5  ? '#b3de69' :
-             w == 4  ? '#fccde5' :
-             w == 3  ? '#d9d9d9' :
-             w == 2  ? '#bc80bd' :
-             w == 1  ? '#8dd3c7' :
-                       '#ccebc5' ;
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css">
+  <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css">
+  <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css">
+<style>
+    html,
+    body,
+    #map {
+      height: 100%;
+      font-family: "Lato", sans-serif;
     }
+    .mapTitle {
+      padding: .25em .5em;
+      font-size: 1.5em;
+      font-weight: bold;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+      border-radius: 5px;
+    }
+    .wardLabel {
+      font-weight: bold;
+      text-align: center;
+      background: rgba(255,255,255,0.0);
+      border: 0px solid #fff;
+      border-radius: 5px;
+    }
+    .my-div-icon {
+      padding: 0;
+      font-weight: bold;
+      text-align: center;
+      background: rgba(255,255,255,1);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+      border-radius: 50%;
+    }
+    .leaflet-popup-content ul {
+      padding-left: 1em;
+    }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="http://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+<script>
 
-    function style(feature) {
-      return {
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.6,
-        fillColor: getColor(feature.properties.WardNumber)
-      };
-    }
+// Map
 
-    function onEachFeature(feature, layer) {
-      if (feature.properties && feature.properties.popupContent) {
-        layer.bindPopup(feature.properties.popupContent)
-      }
-      else if (feature.properties && feature.properties.WardName) {
-        polygonCentre = layer.getBounds().getCenter();
-        myIcon = L.divIcon({
-          className: 'my-div-icon',
-          html: feature.properties.WardName,
-          iconSize: new L.Point(58,20)
-        });
-        L.marker(polygonCentre, {icon: myIcon}).addTo(map);
-      }
-    }
-      
-    var registeredActivities = {{site.data.registered|jsonify}};
-    var unregisteredActivities = {{site.data.unregistered|jsonify}};
-    var capitalGrants = {{site.data.capital|jsonify}};
-    
-    var registered = L.geoJson(registeredActivities, {onEachFeature: onEachFeature});
-    var unregistered = L.geoJson(unregisteredActivities, {onEachFeature: onEachFeature});
-    var capital = L.geoJson(capitalGrants, {onEachFeature: onEachFeature});
-    
-    var markers = L.markerClusterGroup(unregistered);
-      map.addLayer(markers);
-    
-    var wardBoundaries = {{site.data.ward-boundaries|jsonify}};
-    
-    var wards = L.geoJson(wardBoundaries, {
-      onEachFeature: onEachFeature,
-      style: style,
-    }).addTo(map);
-    
-    var title = L.control({position: 'topright'});
-      title.onAdd = function(map) {
-        var div = L.DomUtil.create('div', 'titleDiv');
-        div.innerHTML += 'City of Kitchener Festival of Neighbourhoods 2015';
-        return div
-        }
-        title.addTo(map);
+var map = L.map('map').setView([43.43,-80.46], 12);
+  L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+  id: 'examples.map-i875mjb7'
+}).addTo(map);
+
+// Map Title
+
+var title = L.control({position: 'topright'});
+title.onAdd = function(map) {
+  var div = L.DomUtil.create('div', 'mapTitle');
+  div.innerHTML += 'Festival of Neighbourhoods 2015';
+  return div
+}
+title.addTo(map);
         
-    var baseLayers = {
-      "City of Kitchener Wards": wards
-    };
-    
-    var overlays = {
-      "Registered Activities": registered,
-      "Unregistered Activities": unregistered,
-      "Neighbourhood Improvement Capital Grants": capital
-    };
-    
-    L.control.layers(null, overlays, {collapsed: false}).addTo(map);
-   
-//    var legend = L.control({position: 'bottomright'});
-    
-//      legend.onAdd = function (map) {
-    
-//      var div = L.DomUtil.create('div', 'info legend'),
-//        wards = [1,2,3,4,5,6,7,8,9,10],
-//        labels = [];
-    
-      // loop through our density intervals and generate a label with a colored square for each interval
-//      div.innerHTML = '<b>Wards:</b><br>';
-//      for (var i = 0; i < wards.length; i++) {
-//        div.innerHTML +=
-//            '<i style="background:' + getColor(wards[i]) + '"></i> ' + (wards[i] ? wards[i] + '<br>' : '+');
-//      }
-    
-//      return div;
-//      };
-    
-//    legend.addTo(map);
+// Ward Boundaries
 
-  </script>
+function wardColour(w) {
+  return w == 10 ? '#ffffb3' :
+         w == 9  ? '#bebada' :
+         w == 8  ? '#fb8072' :
+         w == 7  ? '#80b1d3' :
+         w == 6  ? '#fdb462' :
+         w == 5  ? '#b3de69' :
+         w == 4  ? '#fccde5' :
+         w == 3  ? '#d9d9d9' :
+         w == 2  ? '#bc80bd' :
+         w == 1  ? '#8dd3c7' :
+                   '#ccebc5' ;
+}
+
+function wardStyle(feature) {
+  return {
+    weight: 2,
+    opacity: 1,
+    color: 'white',
+    dashArray: '3',
+    fillOpacity: 0.6,
+    fillColor: wardColour(feature.properties.WardNumber)
+  };
+}
+
+function onEachWard(feature, layer) {
+  polygonCentre = layer.getBounds().getCenter();
+  myIcon = L.divIcon({
+    className: 'wardLabel',
+    html: feature.properties.WardName,
+    iconSize: new L.Point(58,20)
+  });
+  L.marker(polygonCentre, {icon: myIcon}).addTo(map);
+}
+
+var wardBoundaries = {{site.data.ward-boundaries|jsonify}};
+
+var wards = L.geoJson(wardBoundaries, {
+  onEachFeature: onEachWard,
+  style: wardStyle
+}).addTo(map);
+
+// Registered Activities
+
+function placeStyle(feature){
+  return {
+    weight: 2,
+    opacity: 1,
+    color: 'white',
+    dashArray: '3',
+    fillOpacity: 0.6,
+    fillColor: 'white'
+  };
+}
+
+function onEachPlace(feature, layer) {
+  var activity_count = feature.properties.activities.length;
+  var activity_list = '<h3>' + feature.properties.neighbourhood + '</h3><ul>';
+  for(var i=0; i < activity_count; i++) {
+    activity_list += '<li>' + feature.properties.activities[i].activity + '</li>';
+  }
+  activity_list += '</ul>';
+  layer.bindPopup(activity_list)
+  myIcon = L.divIcon({
+    className: 'my-div-icon',
+    html: activity_count,
+    iconSize: new L.Point(20,20)
+  });
+  layer.setIcon(myIcon);
+}
+ 
+{% assign activities = site.data.registered-activities | group_by: "code" %}
+
+var registered = {
+  "type": "FeatureCollection", 
+  "features": [{% for act in activities %}{% assign place = site.data.codes | where:"postalCode",act.name %}{
+    "type": "Feature", 
+    "geometry": {
+      "type": "Point", 
+      "coordinates": [
+        {{place[0].lon}},
+        {{place[0].lat}}
+      ]
+    },
+    "properties": {
+      "neighbourhood": "{{place[0].neighbourhood}}",
+      "activities": [{% for item in act.items %}{
+        "date": "{{item.date}}",
+        "activity": "{{item.activity}}"
+      }{% unless forloop.last %},{% endunless %}{% endfor %}]
+    }
+  }{% unless forloop.last %},{% endunless %}{% endfor %}]
+}
+
+var registered_geo = L.geoJson(registered, {
+  onEachFeature: onEachPlace
+});
+
+var markers = L.markerClusterGroup();
+markers.addLayer(registered_geo);
+map.addLayer(markers);
+
+var overlays = {
+  "Registered Activities": markers
+};
+
+L.control.layers(null, overlays, {collapsed: false}).addTo(map);
+
+</script>
+</body>
+</html>
