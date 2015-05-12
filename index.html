@@ -13,8 +13,6 @@ title: Festival of Neighbourhoods
 
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css">
-  <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css">
-  <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css">
 <style>
     html,
     body,
@@ -53,8 +51,6 @@ title: Festival of Neighbourhoods
 <body>
 <div id="map"></div>
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<script src="http://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
 <script>
 
 // Map
@@ -177,13 +173,11 @@ var registered = {
 var registered_geo = L.geoJson(registered, {
   onEachFeature: onEachPlace
 });
-
-var markers = L.markerClusterGroup();
-markers.addLayer(registered_geo);
-map.addLayer(markers);
+map.addLayer(registered_geo);
 
 var overlays = {
-  "Registered Activities": markers
+  "Registered Activities": registered_geo,
+  "Kitchener Wards": wards
 };
 
 L.control.layers(null, overlays, {collapsed: false}).addTo(map);
