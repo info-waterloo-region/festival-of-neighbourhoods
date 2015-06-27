@@ -1,26 +1,11 @@
-# Dependencies
-markdown:         redcarpet
-highlighter:      pygments
+title: "Festival of Neighbourhoods"
 
-# Permalinks
-permalink:        pretty
-relative_permalinks: true
+permalink: pretty
+baseurl: ""
 
-# Setup
-title:            'Festival of Neighbourhoods'
-tagline:          'City of Kitchener, 2015'
-description:      'Creating connections, growing traditions!'
-url:              http://graymo.github.io/FON
-baseurl:          '/FON'
+sass:
+  sass_dir: ./style/_sass
 
-author:
-  name:           'Graeme Ruck'
-  url:            http://waterlooregion.org
+exclude:
+  - README.md
 
-paginate:         5
-
-# Custom vars
-version:          1.0.0
-
-github:
-  repo:           https://github.com/graymo/FON
