@@ -1,0 +1,25 @@
+---
+title: Registered Activities
+layout: page
+selected: activities
+permalink: activities/registered/index.html
+---
+{% assign activities = site.data.registered-activities | sort: "date" %}
+{% assign current_month = 0 %}
+
+{% for act in activities %}
+  {% capture the_month %}{{act.date | date: "%B %Y"}}{% endcapture %}
+  {% if the_month != current_month %}
+    {% assign current_month = the_month %}
+    {% unless forloop.first %}
+</ul>
+    {% endunless %}
+<h3>{{the_month}}</h3>
+<ul>
+  {% endif %}
+  <li>{{act.neighbourhood}} (Ward {{act.ward}}): {{act.activity}}</li>
+  {% if forloop.last %}
+</ul>
+  {% endif %}
+{% endfor %}
+

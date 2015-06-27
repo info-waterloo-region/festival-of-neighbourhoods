@@ -1,0 +1,15 @@
+---
+title: Capital Grants
+layout: page
+selected: grants
+permalink: grants/index.html
+---
+{% assign grants = site.data.grants | sort: "year" %}
+
+<div class="wrapper">
+  {% for g in grants %}
+  <h2>{{g.year}}: {{g.neighbourhood}}</h2>
+  <p>{{g.description}}</p>
+  {% endfor %}
+</div>
+

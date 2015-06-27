@@ -1,187 +1,64 @@
 ---
-title: Festival of Neighbourhoods
+title: Creating Connections, Growing Traditions
+layout: page
+selected: home
 ---
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  
-  <title>
-    {{page.title}}
-  </title>
+<section>
+  <div class="wrapper">
+    <div class="container">
+      <p>Festival of Neighbourhoods invites you to create opportunities to connect with your neighbours - plan a simple gathering or activities, start a neighbourhood project, or work with others to host events in your neighbourhoods that bring people together. These activities can grow into family, neighbourhood, and community traditions, just like Festival of Neighbourhoods has become part of the tradition and strength of our community!</p>
+      <p><strong>Deadline to register your activities for this season is October 5th 2015. All activities held between October 1, 2014 and September 30, 2015 can be eligible for prizes and awards.</strong></p>
+    </div>
+  </div>
+</section>
 
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css">
-<style>
-    html,
-    body,
-    #map {
-      height: 100%;
-      font-family: "Lato", sans-serif;
-    }
-    .mapTitle {
-      padding: .25em .5em;
-      font-size: 1.5em;
-      font-weight: bold;
-      background: rgba(255,255,255,0.8);
-      box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-      border-radius: 5px;
-    }
-    .wardLabel {
-      font-weight: bold;
-      text-align: center;
-      background: rgba(255,255,255,0.0);
-      border: 0px solid #fff;
-      border-radius: 5px;
-    }
-    .my-div-icon {
-      padding: 0;
-      font-weight: bold;
-      text-align: center;
-      background: rgba(255,255,255,1);
-      box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-      border-radius: 50%;
-    }
-    .leaflet-popup-content ul {
-      padding-left: 1em;
-    }
-  </style>
-</head>
-<body>
-<div id="map"></div>
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<script>
+<section>
+  <div class="wrapper">
+    <div class="container">
+      <h2 id="what-is-festival-of-neighbourhoods">What is Festival of Neighbourhoods?</h2>
 
-// Map
+      <p>Festival of Neighbourhoods is a longstanding Kitchener initiative celebrating all acts of neighbourly kindness that are exchanged throughout a year. It is the belief in neighbourhoods and the power of connections in a physical space we inhabit that initiated this unique tradition in 1994.</p>
+    </div>
 
-var map = L.map('map').setView([43.43,-80.46], 12);
-  L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-  maxZoom: 18,
-  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-  id: 'examples.map-i875mjb7'
-}).addTo(map);
+    <blockquote>You plan for ways to bring neighbours together! We plan for ways to support you!</blockquote>
 
-// Map Title
+    <div class="container">
+      <p>Festival of Neighbourhoods invites citizens to plan activities, projects, gatherings or events in their neighbourhoods that bring people together and are open to everyone.  Committed to building healthy communities, Festival of Neighbourhoods encourages people to build stronger relationships with their neighbours.</p>
+    </div>
+  </div>
+</section>
 
-var title = L.control({position: 'topright'});
-title.onAdd = function(map) {
-  var div = L.DomUtil.create('div', 'mapTitle');
-  div.innerHTML += 'Festival of Neighbourhoods 2015';
-  return div
-}
-title.addTo(map);
-        
-// Ward Boundaries
+<section>
+  <div class="wrapper banner">
+    <div class="pure-g container-g">
+      <div class="pure-u-1 pure-u-md-1-2">
+        <h2 id="founding-partners">Founding Partners</h2>
 
-function wardColour(w) {
-  return w == 10 ? '#ffffb3' :
-         w == 9  ? '#bebada' :
-         w == 8  ? '#fb8072' :
-         w == 7  ? '#80b1d3' :
-         w == 6  ? '#fdb462' :
-         w == 5  ? '#b3de69' :
-         w == 4  ? '#fccde5' :
-         w == 3  ? '#d9d9d9' :
-         w == 2  ? '#bc80bd' :
-         w == 1  ? '#8dd3c7' :
-                   '#ccebc5' ;
-}
+        <ul>
+          <li>Social Planning Council of Kitchener-Waterloo </li>
+          <li>City of Kitchener </li>
+          <li>John MacDonald Architect Inc.</li>
+        </ul>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <h2 id="sponsors">Early Bird Sponsors</h2>
 
-function wardStyle(feature) {
-  return {
-    weight: 2,
-    opacity: 1,
-    color: 'white',
-    dashArray: '3',
-    fillOpacity: 0.6,
-    fillColor: wardColour(feature.properties.WardNumber)
-  };
-}
+        <ul>
+          <li>Alejandra and Vladimir Ivic</li>
+          <li>KW Pickleball Association</li>
+          <li>City of Kitchener </li>
+        </ul>
+      </div>
+  </div>
+</section>
 
-function onEachWard(feature, layer) {
-  polygonCentre = layer.getBounds().getCenter();
-  myIcon = L.divIcon({
-    className: 'wardLabel',
-    html: feature.properties.WardName,
-    iconSize: new L.Point(58,20)
-  });
-  L.marker(polygonCentre, {icon: myIcon}).addTo(map);
-}
+<section>
+  <div class="wrapper">
+    <div class="container">
+      <h2 id="neighbourhood-improvement-grant-21000">Neighbourhood Improvement Grant</h2>
 
-var wardBoundaries = {{site.data.ward-boundaries|jsonify}};
+      <p>The Festival of Neighbourhoods (FON) grant got a long-overdue increase on April 14, 2014. The $10,000 grant, which started 20 years ago and has never had an increase, will now be $21,000. Winners of the grant engage their neighbours to select an appropriate project and work with city departments and other partners to implement the plan. This years winner will be decided on October 118th, at the Festival Finale at the Kitchener City Hall. Register your neighbourhood activity and come to celebrate all our successes and you might be the one who wins!</p>
+    </div>
+  </div>
+</section>
 
-var wards = L.geoJson(wardBoundaries, {
-  onEachFeature: onEachWard,
-  style: wardStyle
-}).addTo(map);
-
-// Registered Activities
-
-function placeStyle(feature){
-  return {
-    weight: 2,
-    opacity: 1,
-    color: 'white',
-    dashArray: '3',
-    fillOpacity: 0.6,
-    fillColor: 'white'
-  };
-}
-
-function onEachPlace(feature, layer) {
-  var activity_count = feature.properties.activities.length;
-  var activity_list = '<h3>' + feature.properties.neighbourhood + '</h3><ul>';
-  for(var i=0; i < activity_count; i++) {
-    activity_list += '<li>' + feature.properties.activities[i].activity + '</li>';
-  }
-  activity_list += '</ul>';
-  layer.bindPopup(activity_list)
-  myIcon = L.divIcon({
-    className: 'my-div-icon',
-    html: activity_count,
-    iconSize: new L.Point(20,20)
-  });
-  layer.setIcon(myIcon);
-}
- 
-{% assign activities = site.data.registered-activities | group_by: "code" %}
-
-var registered = {
-  "type": "FeatureCollection", 
-  "features": [{% for act in activities %}{% assign place = site.data.codes | where:"postalCode",act.name %}{
-    "type": "Feature", 
-    "geometry": {
-      "type": "Point", 
-      "coordinates": [
-        {{place[0].lon}},
-        {{place[0].lat}}
-      ]
-    },
-    "properties": {
-      "neighbourhood": "{{place[0].neighbourhood}}",
-      "activities": [{% for item in act.items %}{
-        "date": "{{item.date}}",
-        "activity": "{{item.activity}}"
-      }{% unless forloop.last %},{% endunless %}{% endfor %}]
-    }
-  }{% unless forloop.last %},{% endunless %}{% endfor %}]
-}
-
-var registered_geo = L.geoJson(registered, {
-  onEachFeature: onEachPlace
-});
-map.addLayer(registered_geo);
-
-var overlays = {
-  "Registered Activities": registered_geo,
-  "Kitchener Wards": wards
-};
-
-L.control.layers(null, overlays, {collapsed: false}).addTo(map);
-
-</script>
-</body>
-</html>
