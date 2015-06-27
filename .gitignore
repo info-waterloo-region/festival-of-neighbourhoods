@@ -1,4 +1,9 @@
-*.py
 *.pyc
 
+_py/config.py
+_py/*.json
+
 _site/*
+
+.sass-cache
+
