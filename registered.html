@@ -2,11 +2,13 @@
 title: Registered Activities
 layout: page
 selected: activities
-permalink: activities/registered/index.html
+permalink: registered-activities/index.html
 ---
 {% assign activities = site.data.registered-activities | sort: "date" %}
 {% assign current_month = 0 %}
 
+<div class="wrapper">
+  <div class="container">
 {% for act in activities %}
   {% capture the_month %}{{act.date | date: "%B %Y"}}{% endcapture %}
   {% if the_month != current_month %}
@@ -22,4 +24,6 @@ permalink: activities/registered/index.html
 </ul>
   {% endif %}
 {% endfor %}
+  </div>
+</div>
 
