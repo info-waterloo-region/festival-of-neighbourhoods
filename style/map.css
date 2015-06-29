@@ -18,7 +18,7 @@
 }
 
 .leaflet-top .leaflet-control {
-  margin-top: 2em;
+  margin-top: 4em;
 }
 
 body,
@@ -37,7 +37,7 @@ nav {
 
 .map-container {
   height: 100%;
-  padding-top: 2em;
+  padding-top: 4em;
 }
 
 #map {
@@ -71,4 +71,11 @@ nav {
 .leaflet-popup-content ul {
   padding-left: 1em;
 }
-
+@media screen and (min-width: 35.5em) {
+  .map-container {
+    padding-top: 2em;
+  }
+  .leaflet-top .leaflet-control {
+    margin-top: 2em;
+  }
+}
