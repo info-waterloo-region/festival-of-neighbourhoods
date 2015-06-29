@@ -1,8 +1,10 @@
 ---
-title: Festival of Neighbourhoods
+title: Map
 layout: default
+selected: map
 css:
-  - map.css
+  - "/style/map.css"
+  - "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
 ---
 <div class="map-container">
   <div id="map"></div>
@@ -25,7 +27,7 @@ var map = L.map('map').setView([43.43,-80.46], 12);
   id: 'examples.map-i875mjb7'
 }).addTo(map);
 
-// Ward Boundaries
+// Ward Boundaries 
 
 function wardColour(w) {
   return w == 10 ? '#ffffb3' :
