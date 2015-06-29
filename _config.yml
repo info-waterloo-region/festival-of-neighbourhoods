@@ -1,7 +1,7 @@
 title: "Festival of Neighbourhoods"
 
 permalink: pretty
-baseurl: ""
+baseurl: "/festival-of-neighbourhoods"
 
 sass:
   sass_dir: ./style/_sass
