@@ -22,6 +22,8 @@ with open("_data/codes.csv", "wb") as codes:
 
 acts = [["neighbourhood", "ward", "code", "activity", "date", "quote"]]
 
+new_codes = []
+
 def activities_csv(activities, acts=acts, sheet=code_sheet, codes=code_list):
   new_codes = []
   for act in activities["sheet"].get_all_records():
@@ -52,33 +54,26 @@ def activities_csv(activities, acts=acts, sheet=code_sheet, codes=code_list):
     c = csv.writer(f, quoting=2)
     c.writerows(acts)
 
-  if new_codes:
-    n = "new-{}.csv".format(activities["name"])
-    with open(n, "ab") as f:
-      c = csv.writer(f, quoting=2)
-      c.writerows(new_codes)
-      print "New postal codes in", n
+  return new_codes
       
 reg = {
   "name": "registered",
   "sheet": s.worksheet("RegisteredActivities")
 }
 
-activities_csv(reg)
+new_codes.extend(activities_csv(reg))
 
 unreg = {
   "name": "unregistered",
   "sheet": s.worksheet("UnregisteredActivities")
 }
 
-activities_csv(unreg)
+new_codes.extend(activities_csv(unreg))
 
 grants = {
   "fields": [["code", "neighbourhood", "year", "description"]],
   "sheet": s.worksheet("CapitalGrants")
 }
-
-new_codes = []
 
 for grant in grants["sheet"].get_all_records():
   if grant["postalCode"].strip() not in [c[1] for c in code_list]:
@@ -107,7 +102,7 @@ with open("_data/grants.csv", "wb") as f:
   c.writerows(grants["fields"])
 
 if new_codes:
-  n = "new-codes.csv"
+  n = "_py/new-codes.csv"
   with open(n, "ab") as f:
     c = csv.writer(f, quoting=2)
     c.writerows(new_codes)
