@@ -1,9 +1,9 @@
 ---
 title: Festival of Neighbourhoods Registered Activities
 ---
-{% assign activities = site.data.registered-activities | group_by: "code" %}var registered = {
+var registered = {
   "type": "FeatureCollection", 
-  "features": [{% for act in activities %}{% assign place = site.data.codes | where:"postalCode",act.name %}{
+  "features": [{% for act in site.data.registered-activities %}{% assign place = site.data.codes | where:"postalCode",act.code %}{
     "type": "Feature", 
     "geometry": {
       "type": "Point", 
@@ -13,11 +13,11 @@ title: Festival of Neighbourhoods Registered Activities
       ]
     },
     "properties": {
-      "neighbourhood": "{{place[0].neighbourhood}}",
-      "activities": [{% for item in act.items %}{
-        "date": "{{item.date}}",
-        "activity": "{{item.activity}}"
-      }{% unless forloop.last %},{% endunless %}{% endfor %}]
+      "neighbourhood": "{{act.neighbourhood}}",
+      "activities": [{
+        "date": "{{act.date}}",
+        "activity": "{{act.activity}}"
+      }]
     }
   }{% unless forloop.last %},{% endunless %}{% endfor %}]
 }
