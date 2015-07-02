@@ -73,17 +73,6 @@ var wards = L.geoJson(wardBoundaries, {
 
 // Activities
 
-function placeStyle(feature){
-  return {
-    weight: 2,
-    opacity: 1,
-    color: 'white',
-    dashArray: '3',
-    fillOpacity: 0.6,
-    fillColor: 'white'
-  };
-}
-
 function onEachPlace(feature, layer) {
   var activity_count = feature.properties.activities.length;
   var activity_list = '<h3>' + feature.properties.neighbourhood + '</h3><ul>';
@@ -92,46 +81,26 @@ function onEachPlace(feature, layer) {
   }
   activity_list += '</ul>';
   layer.bindPopup(activity_list)
-  /*
-  myIcon = L.divIcon({
-    className: 'my-div-icon',
-    html: activity_count,
-    iconSize: new L.Point(20,20)
-  });
-  layer.setIcon(myIcon);
-  */
 }
- 
+
+var markers = L.markerClusterGroup();
+
 var registered_geo = L.geoJson(registered, {
   onEachFeature: onEachPlace,
   pointToLayer: function (feature, latlng) {
-    return L.circleMarker(latlng, {
-      radius: 10 + (feature.properties.activities.length * 2),
-      fillColor: "blue",
-      color: "#000",
-      weight: 1,
-      opacity: 1,
-      fillOpacity: 0.5
-    });
+    return L.marker(latlng, {opacity: .5});
   }
-
 });
-map.addLayer(registered_geo);
+markers.addLayer(registered_geo);
 
 var unregistered_geo = L.geoJson(unregistered, {
   onEachFeature: onEachPlace,
   pointToLayer: function (feature, latlng) {
-    return L.circleMarker(latlng, {
-      radius: 10 + (feature.properties.activities.length * 2),
-      fillColor: "#ccc",
-      color: "blue",
-      weight: 1,
-      opacity: 1,
-      fillOpacity: 0.3
-    });
+    return L.marker(latlng, {opacity: .5});
   }
 
 });
+markers.addLayer(unregistered_geo);
 
 var grants_geo = L.geoJson(grants, {
   onEachFeature: function (feature, layer) {
@@ -145,6 +114,8 @@ var grants_geo = L.geoJson(grants, {
     layer.bindPopup(g_info)
   }
 });
+
+map.addLayer(markers);
 
 var overlays = {
   "Registered Activities": registered_geo,
