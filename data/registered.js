@@ -14,10 +14,11 @@ var registered = {
     },
     "properties": {
       "neighbourhood": "{{act.neighbourhood}}",
-      "activities": [{
-        "date": "{{act.date}}",
-        "activity": "{{act.activity}}"
-      }]
+      "activity": {
+        "date": "{{act.date | date: "%b %d, %Y"}}",
+        "activity": "{{act.activity | escape}}",
+        "quote": "{{act.quote | escape}}"
+      }
     }
   }{% unless forloop.last %},{% endunless %}{% endfor %}]
 }
