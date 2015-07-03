@@ -47,7 +47,7 @@ def activities_csv(activities, acts=acts, sheet=code_sheet, codes=code_list):
         act["postalCode"].strip(),
         act["activity"].strip(),
         act["date"].strip(),
-        act["quote"].strip()
+        act["quote"].strip() if "quote" in act else ""
       ])
 
   with open("_data/{}-activities.csv".format(activities["name"]), "wb") as f:
