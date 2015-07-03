@@ -3,16 +3,18 @@ title: Map
 layout: default
 selected: map
 css:
-  - "/festival-of-neighbourhoods/style/map.css"
   - "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
   - "/festival-of-neighbourhoods/style/MarkerCluster.css"
   - "/festival-of-neighbourhoods/style/MarkerCluster.Default.css"
+  - "/festival-of-neighbourhoods/style/leaflet.awesome-markers.css"
+  - "/festival-of-neighbourhoods/style/map.css"
 ---
 <div class="map-container">
   <div id="map"></div>
 </div>
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <script src="../js/leaflet.markercluster.js"></script>
+<script src="../js/leaflet.awesome-markers.js"></script>
 <script src="../data/registered.js"></script>
 <script src="../data/unregistered.js"></script>
 <script src="../data/wards.js"></script>
@@ -74,21 +76,41 @@ var wards = L.geoJson(wardBoundaries, {
 // Activities
 
 function onEachPlace(feature, layer) {
-  var activity_count = feature.properties.activities.length;
-  var activity_list = '<h3>' + feature.properties.neighbourhood + '</h3><ul>';
-  for(var i=0; i < activity_count; i++) {
-    activity_list += '<li>' + feature.properties.activities[i].activity + '</li>';
+  var activity = '<h3>' + feature.properties.neighbourhood + '</h3>';
+  activity += '<h4>' + feature.properties.activity.activity + ' ';
+  activity += '(' + feature.properties.activity.date + ')</h4>';
+  if (feature.properties.activity.quote != '') {
+    activity += '<p>"' + feature.properties.activity.quote + '"</p>';
   }
-  activity_list += '</ul>';
-  layer.bindPopup(activity_list)
+  layer.bindPopup(activity)
 }
+
+var regIcon = L.AwesomeMarkers.icon({
+  prefix: 'fa',
+  markerColor: 'blue',
+  icon: 'group'
+});
+
+var unregIcon = L.AwesomeMarkers.icon({
+  prefix: 'fa',
+  markerColor: 'red',
+  icon: 'group'
+});
+
+var grantIcon = L.AwesomeMarkers.icon({
+  prefix: 'fa',
+  markerColor: 'purple',
+  icon: 'trophy'
+});
 
 var markers = L.markerClusterGroup();
 
 var registered_geo = L.geoJson(registered, {
   onEachFeature: onEachPlace,
   pointToLayer: function (feature, latlng) {
-    return L.marker(latlng, {opacity: .5});
+    return L.marker(latlng, {
+      icon: regIcon
+    });
   }
 });
 markers.addLayer(registered_geo);
@@ -96,7 +118,9 @@ markers.addLayer(registered_geo);
 var unregistered_geo = L.geoJson(unregistered, {
   onEachFeature: onEachPlace,
   pointToLayer: function (feature, latlng) {
-    return L.marker(latlng, {opacity: .5});
+    return L.marker(latlng, {
+      icon: unregIcon
+    });
   }
 
 });
@@ -107,19 +131,23 @@ var grants_geo = L.geoJson(grants, {
     var g_count = feature.properties.grants.length;
     var g_info = '';
     for(var i=0; i < g_count; i++) {
-      g_info += '<h3>' + feature.properties.grants[i].year + '</h3>';
+      g_info += '<h3>' + feature.properties.grants[i].year + ' Capital Grant</h3>';
       g_info += '<p>' + feature.properties.grants[i].neighbourhood + ': ';
       g_info += feature.properties.grants[i].description + '</p>';
     }
     layer.bindPopup(g_info)
+  },
+  pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {
+      icon: grantIcon
+    });
   }
 });
 
 map.addLayer(markers);
 
 var overlays = {
-  "Registered Activities": registered_geo,
-  "Unregistered Activities": unregistered_geo,
+  "Activities": markers,
   "Capital Grants": grants_geo,
   "Kitchener Wards": wards
 };
