@@ -20,11 +20,10 @@ with open("_data/codes.csv", "wb") as codes:
   c = csv.writer(codes, quoting=2)
   c.writerows(code_list)
 
-acts = [["neighbourhood", "ward", "code", "activity", "date", "quote"]]
-
 new_codes = []
 
-def activities_csv(activities, acts=acts, sheet=code_sheet, codes=code_list):
+def activities_csv(activities, sheet=code_sheet, codes=code_list):
+  acts = [["neighbourhood", "ward", "code", "activity", "date", "quote"]]
   new_codes = []
   for act in activities["sheet"].get_all_records():
     if act["postalCode"].strip() not in [c[1] for c in codes]:
@@ -47,7 +46,7 @@ def activities_csv(activities, acts=acts, sheet=code_sheet, codes=code_list):
         act["postalCode"].strip(),
         act["activity"].strip(),
         act["date"].strip(),
-        act["quote"].strip() if "quote" in act else ""
+        act["quote"].strip() if "quote" in act else None
       ])
 
   with open("_data/{}-activities.csv".format(activities["name"]), "wb") as f:
