@@ -13,12 +13,17 @@
   clear: both;
 }
 
-.leaflet-container {
+.leaflet-container,
+.leaflet-popup-content {
   font-family: "Noto Sans", sans-serif;
 }
 
 .leaflet-top .leaflet-control {
   margin-top: 4em;
+}
+
+form.leaflet-control-layers-list {
+  margin: 0;
 }
 
 body,
@@ -68,9 +73,24 @@ nav {
   box-shadow: 0 1px 5px rgba(0,0,0,0.4);
   border-radius: 50%;
 }
-.leaflet-popup-content ul {
-  padding-left: 1em;
+
+.leaflet-popup-content h3 {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1.3em;
+  margin: 0;
 }
+
+.leaflet-popup-content h4 {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.leaflet-popup-content p {
+  font-family: "Noto Sans", sans-serif;
+  margin: 0;
+}
+
 @media screen and (min-width: 35.5em) {
   .map-container {
     padding-top: 2em;
