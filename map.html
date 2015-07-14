@@ -103,7 +103,9 @@ var grantIcon = L.AwesomeMarkers.icon({
   icon: 'trophy'
 });
 
-var markers = L.markerClusterGroup();
+var markers = L.markerClusterGroup({
+  maxClusterRadius: 20
+});
 
 var registered_geo = L.geoJson(registered, {
   onEachFeature: onEachPlace,
