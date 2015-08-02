@@ -41,12 +41,12 @@ def activities_csv(activities, sheet=code_sheet, codes=code_list):
         print "Skipping", act["postalCode"], geo.status
     else:
       acts.append([
-        act["neighbourhood"].strip(),
+        act["neighbourhood"].encode("utf-8").strip(),
         act["ward"],
-        act["postalCode"].strip(),
-        act["activity"].strip(),
+        act["postalCode"].encode("utf-8").strip(),
+        act["activity"].encode("utf-8").strip(),
         act["date"].strip(),
-        act["quote"].strip() if "quote" in act else None
+        act["quote"].encode("utf-8").strip() if "quote" in act else None
       ])
 
   with open("_data/{}-activities.csv".format(activities["name"]), "wb") as f:
@@ -81,8 +81,8 @@ for grant in grants["sheet"].get_all_records():
     if geo.ok:
       print geo.latlng
       new_codes.append([
-        grant["neighbourhood"].strip(),
-        grant["postalCode"].strip(),
+        grant["neighbourhood"].encode("utf-8").strip(),
+        grant["postalCode"].encode("utf-8").strip(),
         geo.latlng["lng"],
         geo.latlng["lat"]
       ])
@@ -90,10 +90,10 @@ for grant in grants["sheet"].get_all_records():
       print "Skipping", grant["postalCode"], geo.status
   else:
     grants["fields"].append([
-      grant["postalCode"].strip(),
-      grant["neighbourhood"].strip(),
+      grant["postalCode"].encode("utf-8").strip(),
+      grant["neighbourhood"].encode("utf-8").strip(),
       grant["year"],
-      grant["description"].strip()
+      grant["description"].encode("utf-8").strip()
     ])
 
 with open("_data/grants.csv", "wb") as f:
