@@ -40,9 +40,10 @@ def activities_csv(activities, sheet=code_sheet, codes=code_list):
       else:
         print "Skipping", act["postalCode"], geo.status
     else:
+      ward = 0 if not act["ward"] else int(act["ward"])
       acts.append([
         act["neighbourhood"].encode("utf-8").strip(),
-        act["ward"],
+        ward,
         act["postalCode"].encode("utf-8").strip(),
         act["activity"].encode("utf-8").strip(),
         act["date"].strip(),
