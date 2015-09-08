@@ -1,0 +1,35 @@
+---
+title: Activities in Wards
+layout: page
+selected: activities
+permalink: wards/index.html
+---
+{% assign registered = site.data.registered-activities | sort: "date" %}
+{% assign unregistered = site.data.unregistered-activities | sort: "date" %}
+
+<div class="wrapper">
+  <div class="container">
+{% for i in (1..10) %}
+    <h3>Ward {{i}}</h3>
+    <h4>Registered Activities</h4>
+    <ul>
+  {% for act in registered %}
+    {% assign ward = act.ward | plus:0 %}
+    {% if ward == i %}
+      <li>{{act.neighbourhood}}: {{act.activity}} ({{act.date | date: "%B %Y"}})</li>
+    {% endif %}
+  {% endfor %}
+    </ul>
+    <h4>Unregistered Activities</h4>
+    <ul>
+  {% for act in unregistered %}
+    {% assign ward = act.ward | plus:0 %}
+    {% if ward == i %}
+      <li>{{act.neighbourhood}}: {{act.activity}} ({{act.date | date: "%B %Y"}})</li>
+    {% endif %}
+  {% endfor %}
+    </ul>
+{% endfor %}
+  </div>
+</div>
+
