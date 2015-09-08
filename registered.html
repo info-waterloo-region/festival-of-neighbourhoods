@@ -14,14 +14,14 @@ permalink: registered-activities/index.html
   {% if the_month != current_month %}
     {% assign current_month = the_month %}
     {% unless forloop.first %}
-</ul>
+    </ul>
     {% endunless %}
-<h3>{{the_month}}</h3>
-<ul>
+    <h3>{{the_month}}</h3>
+    <ul>
   {% endif %}
-  <li>{{act.neighbourhood}} (Ward {{act.ward}}): {{act.activity}}</li>
+      <li>{{act.neighbourhood}} (Ward {{act.ward}}): {{act.activity}}</li>
   {% if forloop.last %}
-</ul>
+    </ul>
   {% endif %}
 {% endfor %}
   </div>
