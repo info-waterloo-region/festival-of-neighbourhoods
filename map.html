@@ -82,6 +82,14 @@ function onEachPlace(feature, layer) {
   layer.bindPopup(activity)
 }
 
+function onEachPlaceUnReg(feature, layer) {
+  var activity = '<h3>' + feature.properties.neighbourhood + '</h3>';
+  activity += '<h4>' + feature.properties.activity.activity + ' ';
+  activity += '(' + feature.properties.activity.date + ')</h4>';
+  activity += '<p>Unregistered activity. <a href="https://docs.google.com/forms/d/1pEDq0xcfV1jerTH6KRh3UIqn6zRVmbLHimbC2gZ1Qpw/viewform">Register now</a>!</p>';
+  layer.bindPopup(activity)
+}
+
 var regIcon = L.AwesomeMarkers.icon({
   prefix: 'fa',
   markerColor: 'blue',
@@ -115,7 +123,7 @@ var registered_geo = L.geoJson(registered, {
 markers.addLayer(registered_geo);
 
 var unregistered_geo = L.geoJson(unregistered, {
-  onEachFeature: onEachPlace,
+  onEachFeature: onEachPlaceUnReg,
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
       icon: unregIcon

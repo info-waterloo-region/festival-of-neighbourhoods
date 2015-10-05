@@ -1,5 +1,5 @@
 ---
-title: Festival of Neighbourhoods Registered Activities
+title: Festival of Neighbourhoods Unregistered Activities
 ---
 var unregistered = {
   "type": "FeatureCollection", 
@@ -17,7 +17,7 @@ var unregistered = {
       "activity": {
         "date": "{{act.date | date: "%b %d, %Y"}}",
         "activity": "{{act.activity | escape}}",
-        "quote": 'Unregistered activity'
+        "quote": ""
       }
     }
   }{% unless forloop.last %},{% endunless %}{% endfor %}]
