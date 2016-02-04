@@ -147,21 +147,21 @@ var registered_2015 = L.geoJson(registered2015, {
   onEachFeature: onEachPlace,
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
-      icon: unregIcon
+      icon: regIcon
     });
   }
 });
 markers2015.addLayer(registered_2015);
 
-var unregistered_geo = L.geoJson(unregistered2015, {
+var unregistered_2015 = L.geoJson(unregistered2015, {
   onEachFeature: onEachPlaceUnReg,
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
-      icon: regIcon
+      icon: unregIcon
     });
   }
 });
-markers2015.addLayer(unregistered_geo);
+markers2015.addLayer(unregistered_2015);
 
 // Grants
 

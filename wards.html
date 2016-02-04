@@ -29,6 +29,7 @@ permalink: wards/index.html
           {% endif %}
         {% endfor %}
           </ul>
+
           <h4>Unregistered Activities</h4>
           <ul>
         {% for act in unregistered %}
@@ -41,9 +42,7 @@ permalink: wards/index.html
       {% endfor %}
 
       </div> <!-- tab-pane -->
-    </div> <!-- tab-content -->
 
-    <div class="tab-content">
       <div role="tabpanel" class="tab-pane" id="2015">
 
       {% assign registered = site.data.registered-activities-2015 | sort: "date" %}

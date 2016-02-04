@@ -12,7 +12,7 @@ scope = ["https://spreadsheets.google.com/feeds"]
 
 credentials = SignedJwtAssertionCredentials(json_key["client_email"], json_key["private_key"], scope)
 g = gspread.authorize(credentials)
-s = g.open("FON Map 2015")
+s = g.open("FON Map 2016")
 code_sheet = s.worksheet("PostalCodes")
 code_list = code_sheet.get_all_values()
 
