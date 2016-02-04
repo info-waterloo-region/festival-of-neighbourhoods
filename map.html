@@ -17,6 +17,8 @@ css:
 <script src="../js/leaflet.awesome-markers.js"></script>
 <script src="../data/registered.js"></script>
 <script src="../data/unregistered.js"></script>
+<script src="../data/registered-2015.js"></script>
+<script src="../data/unregistered-2015.js"></script>
 <script src="../data/wards.js"></script>
 <script src="../data/grants.js"></script>
 <script>
@@ -108,6 +110,7 @@ var grantIcon = L.AwesomeMarkers.icon({
   icon: 'trophy'
 });
 
+// Current Activities
 var markers = L.markerClusterGroup({
   maxClusterRadius: 20
 });
@@ -129,9 +132,38 @@ var unregistered_geo = L.geoJson(unregistered, {
       icon: unregIcon
     });
   }
-
 });
 markers.addLayer(unregistered_geo);
+
+map.addLayer(markers);
+
+// 2015 Activities
+
+var markers2015 = L.markerClusterGroup({
+  maxClusterRadius: 20
+});
+
+var registered_2015 = L.geoJson(registered2015, {
+  onEachFeature: onEachPlace,
+  pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {
+      icon: unregIcon
+    });
+  }
+});
+markers2015.addLayer(registered_2015);
+
+var unregistered_geo = L.geoJson(unregistered2015, {
+  onEachFeature: onEachPlaceUnReg,
+  pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {
+      icon: regIcon
+    });
+  }
+});
+markers2015.addLayer(unregistered_geo);
+
+// Grants
 
 var grants_geo = L.geoJson(grants, {
   onEachFeature: function (feature, layer) {
@@ -151,14 +183,20 @@ var grants_geo = L.geoJson(grants, {
   }
 });
 
-map.addLayer(markers);
+map.addLayer(grants_geo);
+
+// Map controls
+
+var bases = {
+  "2016": markers,
+  "2015": markers2015
+}
 
 var overlays = {
-  "Activities": markers,
   "Capital Grants": grants_geo,
   "Kitchener Wards": wards
 };
 
-L.control.layers(null, overlays, {collapsed: false, position: 'bottomright'}).addTo(map);
+L.control.layers(bases, overlays, {collapsed: false, position: 'bottomright'}).addTo(map);
 
 </script>

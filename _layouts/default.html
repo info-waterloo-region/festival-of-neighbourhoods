@@ -9,9 +9,19 @@
   <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{{ site.baseurl }}/style/main.css" rel="stylesheet">
+  <link href="{{ site.baseurl }}/style/bootstrap.css" rel="stylesheet">
   {% for css in page.css %}
     <link href="{{css}}" rel="stylesheet">
   {% endfor %}
+  <style>
+    .nav-tabs > li > a {
+      text-decoration: none;
+      border-radius: 0;
+    }
+    ul.nav {
+      margin-bottom: 2em;
+    }
+  </style>
 </head>
 <body>
 <nav>

@@ -9,21 +9,63 @@ permalink: unregistered-activities/index.html
 
 <div class="wrapper">
   <div class="container">
-{% for act in activities %}
-  {% capture the_month %}{{act.date | date: "%B %Y"}}{% endcapture %}
-  {% if the_month != current_month %}
-    {% assign current_month = the_month %}
-    {% unless forloop.first %}
-</ul>
-    {% endunless %}
-<h3>{{the_month}}</h3>
-<ul>
-  {% endif %}
-  <li>{{act.neighbourhood}} (Ward {{act.ward}}): {{act.activity}}</li>
-  {% if forloop.last %}
-</ul>
-  {% endif %}
-{% endfor %}
-  </div>
-</div>
+
+    <ul class="nav nav-tabs" style="margin-bottom:2em;">
+      <li role="presentation" class="active"><a href="#2016" data-toggle="tab">2016</a></li>
+      <li role="presentation"><a href="#2015" data-toggle="tab">2015</a></li>
+    </ul>
+    
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="2016">
+
+      {% assign activities = site.data.unregistered-activities | sort: "date" %}
+      {% assign current_month = 0 %}
+
+      {% for act in activities %}
+        {% capture the_month %}{{act.date | date: "%B %Y"}}{% endcapture %}
+        {% if the_month != current_month %}
+          {% assign current_month = the_month %}
+          {% unless forloop.first %}
+          </ul>
+          {% endunless %}
+          <h3>{{the_month}}</h3>
+          <ul>
+        {% endif %}
+            <li>{{act.neighbourhood}} (Ward {{act.ward}}): {{act.activity}}</li>
+        {% if forloop.last %}
+          </ul>
+        {% endif %}
+      {% endfor %}
+
+      </div> <!-- tab-pane -->
+    </div> <!-- tab-content -->
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane" id="2015">
+
+      {% assign activities = site.data.unregistered-activities-2015 | sort: "date" %}
+      {% assign current_month = 0 %}
+
+      {% for act in activities %}
+        {% capture the_month %}{{act.date | date: "%B %Y"}}{% endcapture %}
+        {% if the_month != current_month %}
+          {% assign current_month = the_month %}
+          {% unless forloop.first %}
+          </ul>
+          {% endunless %}
+          <h3>{{the_month}}</h3>
+          <ul>
+        {% endif %}
+            <li>{{act.neighbourhood}} (Ward {{act.ward}}): {{act.activity}}</li>
+        {% if forloop.last %}
+          </ul>
+        {% endif %}
+      {% endfor %}
+
+      </div> <!-- tab-pane -->
+    </div> <!-- tab-content -->
+
+
+  </div> <!-- container -->
+</div> <!-- wrapper -->
 
