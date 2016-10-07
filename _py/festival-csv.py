@@ -103,7 +103,7 @@ with open("_data/grants.csv", "wb") as f:
 
 if new_codes:
   n = "_py/new-codes.csv"
-  with open(n, "ab") as f:
+  with open(n, "wb") as f:
     c = csv.writer(f, quoting=2)
     c.writerows(new_codes)
     print "New postal codes in", n
