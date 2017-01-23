@@ -1,7 +1,7 @@
 ---
 title: Festival of Neighbourhoods Unregistered Activities
 ---
-var unregistered2015 = {
+var unregistered2016 = {
   "type": "FeatureCollection", 
   "features": [{% for act in site.data.unregistered-activities-2016 %}{% assign place = site.data.codes | where:"postalCode",act.code %}{
     "type": "Feature", 

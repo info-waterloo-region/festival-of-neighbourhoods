@@ -1,7 +1,7 @@
 ---
 title: Festival of Neighbourhoods Registered Activities
 ---
-var registered2015 = {
+var registered2016 = {
   "type": "FeatureCollection", 
   "features": [{% for act in site.data.registered-activities-2016 %}{% assign place = site.data.codes | where:"postalCode",act.code %}{
     "type": "Feature", 
