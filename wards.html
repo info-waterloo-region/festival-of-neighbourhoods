@@ -8,12 +8,13 @@ permalink: wards/index.html
   <div class="container">
 
     <ul class="nav nav-tabs" style="margin-bottom:2em;">
-      <li role="presentation" class="active"><a href="#2016" data-toggle="tab">2016</a></li>
+      <li role="presentation" class="active"><a href="#2017" data-toggle="tab">2017</a></li>
+      <li role="presentation"><a href="#2016" data-toggle="tab">2016</a></li>
       <li role="presentation"><a href="#2015" data-toggle="tab">2015</a></li>
     </ul>
     
     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="2016">
+      <div role="tabpanel" class="tab-pane active" id="2017">
 
       {% assign registered = site.data.registered-activities | sort: "date" %}
       {% assign unregistered = site.data.unregistered-activities | sort: "date" %}
@@ -30,6 +31,35 @@ permalink: wards/index.html
         {% endfor %}
           </ul>
 
+          <h4>Unregistered Activities</h4>
+          <ul>
+        {% for act in unregistered %}
+          {% assign ward = act.ward | plus:0 %}
+          {% if ward == i %}
+            <li>{{act.neighbourhood}}: {{act.activity}} ({{act.date | date: "%B %Y"}})</li>
+          {% endif %}
+        {% endfor %}
+          </ul>
+      {% endfor %}
+
+      </div> <!-- tab-pane -->
+
+      <div role="tabpanel" class="tab-pane" id="2016">
+
+      {% assign registered = site.data.registered-activities-2016 | sort: "date" %}
+      {% assign unregistered = site.data.unregistered-activities-2016 | sort: "date" %}
+
+      {% for i in (1..10) %}
+          <h3>Ward {{i}}</h3>
+          <h4>Registered Activities</h4>
+          <ul>
+        {% for act in registered %}
+          {% assign ward = act.ward | plus:0 %}
+          {% if ward == i %}
+            <li>{{act.neighbourhood}}: {{act.activity}} ({{act.date | date: "%B %Y"}})</li>
+          {% endif %}
+        {% endfor %}
+          </ul>
           <h4>Unregistered Activities</h4>
           <ul>
         {% for act in unregistered %}
