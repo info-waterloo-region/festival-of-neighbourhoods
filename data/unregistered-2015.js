@@ -3,7 +3,7 @@ title: Festival of Neighbourhoods Unregistered Activities
 ---
 var unregistered2015 = {
   "type": "FeatureCollection", 
-  "features": [{% for act in site.data.unregistered-activities %}{% assign place = site.data.codes | where:"postalCode",act.code %}{
+  "features": [{% for act in site.data.unregistered-activities-2015 %}{% assign place = site.data.codes | where:"postalCode",act.code %}{
     "type": "Feature", 
     "geometry": {
       "type": "Point", 
