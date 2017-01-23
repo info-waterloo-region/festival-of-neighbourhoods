@@ -58,14 +58,14 @@ def activities_csv(activities, sheet=code_sheet, codes=code_list):
       
 reg = {
   "name": "registered",
-  "sheet": s.worksheet("RegisteredActivities")
+  "sheet": s.worksheet("Registered")
 }
 
 new_codes.extend(activities_csv(reg))
 
 unreg = {
   "name": "unregistered",
-  "sheet": s.worksheet("UnregisteredActivities")
+  "sheet": s.worksheet("Unregistered")
 }
 
 new_codes.extend(activities_csv(unreg))
