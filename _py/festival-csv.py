@@ -5,12 +5,18 @@ import geocoder
 
 import config
 
-from oauth2client.client import SignedJwtAssertionCredentials
+# If using oauth2client < 2.0.0
+# from oauth2client.client import SignedJwtAssertionCredentials
+# scope = ["https://spreadsheets.google.com/feeds"]
+# json_key = json.load(open(config.json_key))
+# credentials = SignedJwtAssertionCredentials(json_key["client_email"], json_key["private_key"], scope)
 
-json_key = json.load(open(config.json_key))
-scope = ["https://spreadsheets.google.com/feeds"]
+from oauth2client.service_account import ServiceAccountCredentials
 
-credentials = SignedJwtAssertionCredentials(json_key["client_email"], json_key["private_key"], scope)
+scope = ['https://spreadsheets.google.com/feeds']
+
+credentials = ServiceAccountCredentials.from_json_keyfile_name(config.json_key, scope)
+
 g = gspread.authorize(credentials)
 s = g.open("FON Map 2017")
 code_sheet = s.worksheet("PostalCodes")
