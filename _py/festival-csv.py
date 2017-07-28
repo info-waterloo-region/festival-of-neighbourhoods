@@ -36,12 +36,12 @@ def activities_csv(activities, sheet=code_sheet, codes=code_list):
       print "Missing postal code", act["postalCode"]
       geo = geocoder.google(act["postalCode"].strip())
       if geo.ok:
-        print geo.latlng
+        print geo.json
         new_codes.append([
           act["neighbourhood"].strip(),
           act["postalCode"].strip(),
-          geo.latlng["lng"],
-          geo.latlng["lat"]
+          geo.lng,
+          geo.lat
         ])
       else:
         print "Skipping", act["postalCode"], geo.status
