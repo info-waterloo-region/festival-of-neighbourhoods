@@ -90,8 +90,8 @@ for grant in grants["sheet"].get_all_records():
       new_codes.append([
         grant["neighbourhood"].encode("utf-8").strip(),
         grant["postalCode"].encode("utf-8").strip(),
-        geo.latlng["lng"],
-        geo.latlng["lat"]
+        geo.lng,
+        geo.lat
       ])
     else:
       print "Skipping", grant["postalCode"], geo.status
