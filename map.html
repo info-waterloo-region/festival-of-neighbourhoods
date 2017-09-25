@@ -90,7 +90,7 @@ function onEachPlaceUnReg(feature, layer) {
   var activity = '<h3>' + feature.properties.neighbourhood + '</h3>';
   activity += '<h4>' + feature.properties.activity.activity + ' ';
   activity += '(' + feature.properties.activity.date + ')</h4>';
-  activity += '<p>Unregistered activity. <a href="http://waterlooregion.org/neighbourhoods#Registering">Register now</a>!</p>';
+  activity += '<p>Unregistered activity. <a href="http://www.waterlooregion.org/festival-of-neighbourhoods-registration-short">Register now</a>!</p>';
   layer.bindPopup(activity)
 }
 
