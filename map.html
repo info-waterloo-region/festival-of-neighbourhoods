@@ -17,6 +17,8 @@ css:
 <script src="../js/leaflet.awesome-markers.js"></script>
 <script src="../data/registered.js"></script>
 <script src="../data/unregistered.js"></script>
+<script src="../data/registered-2017.js"></script>
+<script src="../data/unregistered-2017.js"></script>
 <script src="../data/registered-2016.js"></script>
 <script src="../data/unregistered-2016.js"></script>
 <script src="../data/registered-2015.js"></script>
@@ -139,6 +141,32 @@ markers.addLayer(unregistered_geo);
 
 map.addLayer(markers);
 
+// 2017 Activities
+
+var markers2017 = L.markerClusterGroup({
+  maxClusterRadius: 20
+});
+
+var registered_2017 = L.geoJson(registered2017, {
+  onEachFeature: onEachPlace,
+  pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {
+      icon: regIcon
+    });
+  }
+});
+markers2017.addLayer(registered_2017);
+
+var unregistered_2017 = L.geoJson(unregistered2017, {
+  onEachFeature: onEachPlaceUnReg,
+  pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {
+      icon: unregIcon
+    });
+  }
+});
+markers2017.addLayer(unregistered_2017);
+
 // 2016 Activities
 
 var markers2016 = L.markerClusterGroup({
@@ -216,7 +244,8 @@ map.addLayer(grants_geo);
 // Map controls
 
 var bases = {
-  "2017": markers,
+  "2018": markers,
+  "2017": markers2017,
   "2016": markers2016,
   "2015": markers2015
 }
